@@ -1,0 +1,140 @@
+/*
+	This CSS file matches the color scheme from MudBlazor to Bootstrap when utilized for authentication.
+	The file remains available at all times for demonstration purposes,
+	but it is exclusively employed in the 'App.razor' component when authentication is enabled.
+*/
+
+.btn-primary {
+    text-transform: uppercase;
+    --bs-btn-bg: var(--mud-palette-primary) !important;
+    --bs-btn-hover-bg: var(--mud-palette-primary-darken) !important;
+}
+
+.nav-pills {
+    --bs-nav-pills-link-active-bg: var(--mud-palette-primary) !important;
+}
+
+.nav {
+    --bs-nav-link-color: var(--mud-palette-primary) !important;
+    --bs-nav-link-hover-color: var(--mud-palette-primary-darken) !important;
+}
+
+.lastAdded {
+    background-color: #ffff99;
+}
+
+.lastEdited {
+    background-color: #ffe4b5;
+}
+
+.lastViewed {
+    background-color: #f0f8ff;
+}
+
+.table-sort-button {display:none;float:right}
+.mud-table-cell {cursor:pointer}
+.cursor-progress th {cursor:progress}
+th.mud-table-cell:hover {
+    font-weight:bold;
+}
+th.mud-table-cell:hover .table-sort-button {
+    display: inline
+}
+
+.autoFormButtons {
+    position:absolute;
+    right:20px;
+    top:20px;
+    padding-right:87px;
+    padding-top:13px;
+}
+
+th, td {
+    align-content: baseline;
+    border:none;
+}
+
+th .mud-range-container {
+    margin:0;
+}
+
+.directEdit td.editable:hover, .mud-table-root .mud-table-body tr.selected td {
+    background-color: var(--mud-palette-primary);
+    color: var(--mud-palette-primary-text);
+}
+
+tr.selected a {
+    color: var(--mud-palette-primary-text);
+}
+
+.directEdit td.editable:hover {
+    cursor: text;
+}
+
+tr.selected:hover td, tr.selected:hover td a {
+    background-color: var(--mud-palette-table-lines) !important;
+    color: var(--mud-palette-primary) !important;
+}
+
+
+.directEdit td.editable:hover a {
+    pointer-events: none;
+    color: var(--mud-palette-primary-text);
+}
+
+.directEdit td:hover:not(.editable) {
+    cursor:not-allowed;
+}
+
+.mud-breadcrumbs a, .mud-breadcrumb-separator > span {
+    color: white
+}
+
+#mud-snackbar-container a {color: white}
+
+body.cursor-progress * {cursor:wait !important}
+
+.mud-breadcrumbs-expander {background-color:unset}
+
+table thead {
+    position: sticky;
+    top: 80px;
+    z-index: 99;
+    background-color: #eee;
+}
+
+table tbody tr:hover {
+    background-color: var(--mud-palette-table-hover);
+}
+
+.stickyToolbar {
+    position:sticky;
+    top:30px;
+    background-color:white;
+    padding-right:50px;
+}
+
+.addRowButtonParent {
+    position:fixed;
+    top: 55px;
+    right: 10px;
+    z-index: 100
+}
+
+.addRowButtonChild {
+    position:absolute;
+    top: 4px;
+    right: 0px;
+    z-index: 100
+}
+
+tfoot .mud-table-cell {
+    border-top: 1px solid black;
+    border-bottom: 3px double black;
+}
+
+.mud-table-root {
+    user-select: none;
+    border-collapse: separate;
+    margin-bottom:60px;
+}

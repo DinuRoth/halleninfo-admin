@@ -1,0 +1,35 @@
+﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Identity
+@using xTend.Service
+
+@inject IUserDB Database
+@inject NavigationManager NavigationManager
+
+@namespace Halleninfo
+
+<MyMudThemeProvider />
+<XTProviders />
+
+<MudLayout>
+    <MudAppBar Elevation="1" Color="Color.Primary" Dense=true Fixed=true >
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <a href="/Dashboard" style="color:white">
+            <MudText Typo="Typo.h5" Class="ml-3">Halleninfo Admin</MudText>
+        </a>
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Variant="DrawerVariant.Temporary">
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent Style="margin:10px">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+
+@code {
+    bool _drawerOpen = false;
+
+    void DrawerToggle() {
+        _drawerOpen = !_drawerOpen;
+    }
+}

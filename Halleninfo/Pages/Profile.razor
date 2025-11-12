@@ -1,0 +1,20 @@
+﻿@page "/Profile"
+
+@using xTend
+
+@if (SessionService.IsLoggedIn) {
+    <p>&nbsp;</p>
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="6">
+            <MudPaper Class="pa-16 ma-2" Elevation="3" xs="5">
+                <XTProfile/>
+                <MudDivider class="my-4" />
+                <XTLogout/>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+}
+
+@code {
+
+}

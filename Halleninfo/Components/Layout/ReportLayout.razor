@@ -1,0 +1,20 @@
+﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Identity
+@using xTend.Service
+
+@inject IUserDB Database
+
+
+<MyMudThemeProvider />
+<XTProviders />
+
+<MudLayout Style="height:100vh">
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+
+@code {
+
+}

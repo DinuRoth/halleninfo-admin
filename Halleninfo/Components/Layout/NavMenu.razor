@@ -1,0 +1,21 @@
+﻿@inject IUserDB UserDB
+@inject SessionService SessionService
+
+@namespace Halleninfo
+
+<MudNavMenu>
+	@if (SessionService.IsLoggedIn)
+	{
+		<MudNavLink Href="/Profile" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">@SessionService.User?.Email</MudNavLink>
+		<MudNavLink Icon="@Icons.Material.Filled.Dashboard" Href="/Dashboard" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+		
+
+		<XTAdminMenu/>
+	} else {
+			<MudNavLink Href="/Login" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Login</MudNavLink>
+	}
+</MudNavMenu>
+
+@code {
+	List<xtNavigation> _nav;
+}

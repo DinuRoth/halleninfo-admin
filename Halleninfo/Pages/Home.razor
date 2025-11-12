@@ -1,0 +1,10 @@
+﻿@page "/"
+
+@inject NavigationManager navigationManager
+
+
+@code {
+    protected override void OnAfterRender(bool firstRender) {
+        if (SessionService.IsLoggedIn) navigationManager.NavigateTo("/Dashboard", true);
+    }
+}
