@@ -4,18 +4,68 @@
 @namespace Halleninfo
 
 <MudNavMenu>
-	@if (SessionService.IsLoggedIn)
-	{
+	@if (SessionService.IsLoggedIn && SessionService.User.IsAdmin() && !IsHeaderMenu) {
 		<MudNavLink Href="/Profile" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">@SessionService.User?.Email</MudNavLink>
 		<MudNavLink Icon="@Icons.Material.Filled.Dashboard" Href="/Dashboard" Match="NavLinkMatch.All">Dashboard</MudNavLink>
-		
+
+		<div class="menuItems">
+			@if (_nav != null) {
+				@foreach (var nav in _nav) {
+					<MudNavLink class="navigationItem" Href=@UpdateOldNav(nav.url) Match=@NavLinkMatch.Prefix>@nav.xtNavigation_Bez</MudNavLink>
+				}
+			}
+		</div>
 
 		<XTAdminMenu/>
-	} else {
-			<MudNavLink Href="/Login" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Login</MudNavLink>
+	}
+	else if (SessionService.IsLoggedIn) {
+		<div class="menuItems">
+			@if (_nav != null) {
+				@foreach (var nav in _nav) {
+					<MudNavLink class="navigationItem" Href=@UpdateOldNav(nav.url) Match=@NavLinkMatch.Prefix>@nav.xtNavigation_Bez</MudNavLink>
+				}
+			}
+		</div>
+
+		<MudNavLink class="navigationItem" Href="/Profile" Match="NavLinkMatch.Prefix">@SessionService.User?.Email</MudNavLink>
+	}
+	else {
+		<MudNavLink Href="/Login" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Login</MudNavLink>
 	}
 </MudNavMenu>
 
 @code {
-	List<xtNavigation> _nav;
+
+	[Parameter]
+	public bool IsHeaderMenu { get; set; }
+
+	List<xtNavigation>? _nav;
+
+	protected override void OnInitialized() {
+		base.OnInitialized();
+
+		var nav = Database.ReadAll<xtNavigation>();
+		nav.RemoveAll(x => x.xtActivation_FK != xtActivation.On);
+		nav.RemoveAll(x => x.xtUsergroup_Liste.Any(ug => SessionService.User?.Usergroups.Contains(ug) != true));
+
+		_nav = nav.OrderBy(x => x.Reihenfolge).ToList();
+	}
+
+	private string UpdateOldNav(string url) {
+		if (url.Contains("tablename=")) {
+			var table = url.Split("=")[1];
+			return $"/List/{table}";
+		}
+
+		if (url.Contains("action=New&type=")) {
+			var type = url.Split("&type=")[1].Split("&id=")[0];
+
+			if (type == "State") return "/ChangeState";
+
+			return $"/Object/{type}/0/true";
+		}
+
+		return url;
+	}
+
 }

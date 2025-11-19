@@ -1,0 +1,30 @@
+﻿@page "/ChangeState"
+
+@if (_state != null) {
+    <XTAutoForm Model=@_state EditMode></XTAutoForm>
+    
+    @* <MudPaper class="statePaper"> *@
+    @*     <MudText Typo=@Typo.h4>Betriebszustand: @(_state.xtUsergroup?.xtUsergroup_Bez ?? _state.State_ID.ToString())</MudText> *@
+    @*      *@
+    @*     <CascadingValue Value=@_state> *@
+    @*         <XTAutoInput Property=@(Connector.GetProperty<State>(x => x.Hallenstatus_FK))></XTAutoInput> *@
+    @*     </CascadingValue> *@
+    @* </MudPaper> *@
+}
+
+@code {
+    private State? _state;
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+
+        if (Database.CurrentUser.IsAdmin()) {
+            NavigationManager.NavigateTo("/list/State");
+        }
+        else {
+            if (Database.CurrentUser != null && Database.CurrentUser.Usergroups.Any()) {
+                _state = Database.ReadMultiple<State>($"{nameof(State.xtUsergroup_FK)} = {Database.CurrentUser.Usergroups.First().xtUsergroup_ID}").First();
+            }
+        }
+    }
+}

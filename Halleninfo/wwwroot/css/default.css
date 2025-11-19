@@ -1,0 +1,88 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    background-color: #d7edf2;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    height: unset;
+    background-color: transparent;
+    padding: 20px;
+    position: relative !important;
+    color: #000000;
+}
+
+.header div {
+    height: unset !important;
+}
+
+.header nav div {
+    margin: auto;
+}
+
+.logo {
+    width: 104px;
+    margin: 20px;
+}
+
+.navMenuDesktop nav {
+    display: flex;
+}
+
+.menuItems {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.navigationItem {
+    width: unset;
+}
+
+.drawerMenu {
+    top: 0 !important;
+    height: 100% !important;
+}
+
+.drawerMenu .menuItems {
+    flex-wrap: unset;
+    flex-direction: column;
+    align-items: unset;
+    margin: 10px 0;
+}
+
+.stickyToolbar {
+    top: 0;
+}
+
+table.mud-table-sticky-header thead {
+    top: 50px;
+}
+
+.addRowButtonParent {
+    top: 180px;
+}
+
+.drawerMenuButtonMobile {
+    display: none;
+}
+
+.statePaper {
+    padding: 30px;
+}
+
+@media screen and (max-width: 900px) {
+    .navMenuDesktop {
+        display: none;
+    }
+    
+    .drawerMenuButtonMobile {
+        display: block;
+    }
+}

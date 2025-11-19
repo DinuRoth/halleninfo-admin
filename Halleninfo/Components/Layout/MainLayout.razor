@@ -7,19 +7,34 @@
 
 @namespace Halleninfo
 
-<MyMudThemeProvider />
-<XTProviders />
+<MyMudThemeProvider/>
+<XTProviders/>
 
 <MudLayout>
-    <MudAppBar Elevation="1" Color="Color.Primary" Dense=true Fixed=true >
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+    <MudAppBar Elevation="0" Fixed=true class="header">
+
+        @if (SessionService.User.IsAdmin()) {
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+        }
+        else if (SessionService.IsLoggedIn && !SessionService.User.IsAdmin()) {
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" class="drawerMenuButtonMobile"/>
+        }
+
         <a href="/Dashboard" style="color:white">
-            <MudText Typo="Typo.h5" Class="ml-3">Halleninfo Admin</MudText>
+            <img src="images/logo.svg" alt="Halleninfo Logo" class="logo"/>
         </a>
+
+        <MudSpacer/>
+
+        <div class="navMenuDesktop">
+            <NavMenu IsHeaderMenu/>
+        </div>
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Variant="DrawerVariant.Temporary">
+
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" Variant="DrawerVariant.Temporary" class="drawerMenu">
         <NavMenu/>
     </MudDrawer>
+
     <MudMainContent Style="margin:10px">
         @Body
     </MudMainContent>
@@ -32,4 +47,5 @@
     void DrawerToggle() {
         _drawerOpen = !_drawerOpen;
     }
+
 }
