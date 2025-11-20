@@ -16,6 +16,7 @@ namespace Halleninfo {
             Hallenstatus_Bez = bez;
         }
 
+        public override int Id { get => Hallenstatus_ID; }
         public int Hallenstatus_ID { get; set; }
         public string Hallenstatus_Bez { get; set; }
 

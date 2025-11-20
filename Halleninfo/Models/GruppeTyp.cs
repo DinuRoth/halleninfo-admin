@@ -20,6 +20,8 @@ namespace Halleninfo {
             GruppeTyp_ID = id;
             GruppeTyp_Bez = bez;
         }
+
+        public override int Id { get => GruppeTyp_ID; }
         public int GruppeTyp_ID { get; set; }
         public string GruppeTyp_Bez { get; set; }
         

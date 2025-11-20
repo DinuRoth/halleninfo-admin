@@ -14,6 +14,8 @@ namespace Halleninfo {
             Typ_ID = id;
             Typ_Bez = bez;
         }
+
+        public override int Id { get => Typ_ID; }
         public int Typ_ID { get; set; }
         public string Typ_Bez { get; set; }
 
