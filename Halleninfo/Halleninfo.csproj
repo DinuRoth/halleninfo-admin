@@ -28,7 +28,8 @@
 
 
     <ItemGroup>
-        <ProjectReference Include="$(xTendPath)"/>
+        <ProjectReference Include="$(xTendPath)" />
+        <ProjectReference Include="..\..\..\xTend\xTend.csproj" />
     </ItemGroup>
 
 </Project>
