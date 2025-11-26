@@ -46,7 +46,7 @@
 
 		var nav = Database.ReadAll<xtNavigation>();
 		nav.RemoveAll(x => x.xtActivation_FK != xtActivation.On);
-		nav.RemoveAll(x => x.xtUsergroup_Liste.Any(ug => SessionService.User?.Usergroups.Contains(ug) != true));
+		nav.RemoveAll(x => !x.xtUsergroup_LST.Contains(SessionService.User?.Usergroups[0]));
 
 		_nav = nav.OrderBy(x => x.Reihenfolge).ToList();
 	}
@@ -63,6 +63,10 @@
 			if (type == "State") return "/ChangeState";
 
 			return $"/Object/{type}/0/true";
+		}
+
+		if (url == "/custom/Display.aspx") {
+			url = $"https://halleninfo.ch/custom/{SessionService.User?.Usergroups[0].xtUsergroup_Bez}.aspx";
 		}
 
 		return url;
