@@ -47,15 +47,17 @@ namespace Halleninfo {
         }
 
         public override List<PropertyInfo>? GetIsUnique() {
-            List<PropertyInfo>? result = null;
+            List<PropertyInfo>? result = new();
             result.Add(Connector.GetProperty<Belegung>(x => x.Zeitfenster_FK));
             result.Add(Connector.GetProperty<Belegung>(x => x.Raum_FK));
             result.Add(Connector.GetProperty<Belegung>(x => x.Halle_FK));
             result.Add(Connector.GetProperty<Belegung>(x => x.Gruppe_FK));
+            result.Add(Connector.GetProperty<Belegung>(x => x.Typ_FK));
 
-            if (Database.ReadMultiple<Belegung>(
-                        $"{nameof(Zeitfenster_FK)} = {Zeitfenster_FK} AND {nameof(Raum_FK)} = {Raum_FK} AND {nameof(Halle_FK)} = {Halle_FK} AND {nameof(Gruppe_FK)} = {Gruppe_FK} AND {nameof(Belegung_ID)} <> {Belegung_ID} AND {nameof(Aktiv)} = 1")
-                    .Count > 0) {
+            var existing = Database.ReadMultiple<Belegung>(
+                $"{nameof(Zeitfenster_FK)} = {Zeitfenster_FK} AND {nameof(Raum_FK)} = {Raum_FK} AND {nameof(Halle_FK)} = {Halle_FK} AND {nameof(Gruppe_FK)} = {Gruppe_FK} AND {nameof(Belegung_ID)} <> {Belegung_ID} AND {nameof(Aktiv)} = 1");
+            
+            if (existing.Count > 0 && existing.Any(e => e.Typ_FK == Typ_FK)) {
                 return result;
             }
 
