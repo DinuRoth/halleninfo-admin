@@ -73,7 +73,7 @@
 		}
 
 		if (url == "/custom/Display.aspx") {
-			url = $"https://halleninfo.ch/custom/{SessionService.User?.Usergroups[0].xtUsergroup_Bez}.aspx";
+			url = $"https://halleninfo.ch/custom/{SessionService.User?.Usergroups[0].xtUsergroup_Bez}.aspx?now=1";
 		}
 
 		return url;
