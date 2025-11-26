@@ -27,5 +27,23 @@ namespace Halleninfo {
                 foreignDBOs.AddRange(Database.CurrentUser.Usergroups);
             }
         }
+        
+        public override List<PropertyInfo> EditableProperties {
+            get {
+                var list = base.ShowProperties;
+
+                if (!Database.CurrentUser.IsAdmin()) {
+                    list.RemoveAll(l => l.Name == nameof(Halle_ID));
+                    list.RemoveAll(l => l.Name == nameof(xtUsergroup_FK));
+                }
+
+                return list;
+            }
+        }
+
+        public override void OnCreated() {
+            xtUsergroup_FK = Database.CurrentUser.Usergroups.First().xtUsergroup_ID;
+            base.OnCreated();
+        }
     }
 }

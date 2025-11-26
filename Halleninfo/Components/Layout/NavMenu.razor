@@ -22,7 +22,14 @@
 		<div class="menuItems">
 			@if (_nav != null) {
 				@foreach (var nav in _nav) {
+					@if (nav.url == "/custom/Display.aspx") {
+						
+					<MudNavLink class="navigationItem" Href=@UpdateOldNav(nav.url) Target="_blank" Match=@NavLinkMatch.Prefix>@nav.xtNavigation_Bez</MudNavLink>
+					}
+					else {
 					<MudNavLink class="navigationItem" Href=@UpdateOldNav(nav.url) Match=@NavLinkMatch.Prefix>@nav.xtNavigation_Bez</MudNavLink>
+						
+					}
 				}
 			}
 		</div>

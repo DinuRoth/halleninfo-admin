@@ -33,12 +33,17 @@ namespace Halleninfo {
                 var list = base.ShowProperties;
                 
                 if (!Database.CurrentUser.IsAdmin()) {
-                    list.RemoveAll(l => l.Name == nameof(xtUsergroup_FK));
                     list.RemoveAll(l => l.Name == nameof(State_ID));
+                    list.RemoveAll(l => l.Name == nameof(xtUsergroup_FK));
                 }
                 
                 return list;
             }
+        }
+
+        public override void OnCreated() {
+            xtUsergroup_FK = Database.CurrentUser.Usergroups.First().xtUsergroup_ID;
+            base.OnCreated();
         }
     }
 }

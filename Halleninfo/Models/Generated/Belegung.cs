@@ -21,7 +21,6 @@ namespace Halleninfo {
 		private System.Boolean _Aktiv;
 		private System.Int32 _Typ_FK;
 		private System.Int32? _Gruppe_FK;
-		private System.String? _GruppeStrinh;
 
 
         [Column]
@@ -118,19 +117,6 @@ namespace Halleninfo {
                     _Gruppe_FK = value;
                 _Gruppe = null; // reset the foreign DBO
                     OnFieldChanged(nameof(Gruppe_FK), oldVal, value);
-                }
-            }
-        }
-		[Column]
-		[StringLength(90)]
-		public System.String? GruppeStrinh {
-            get { return _GruppeStrinh; }
-            set {
-                if (value != _GruppeStrinh) {
-                    var oldVal = _GruppeStrinh;
-                    _GruppeStrinh = value;
-                
-                    OnFieldChanged(nameof(GruppeStrinh), oldVal, value);
                 }
             }
         }
@@ -244,8 +230,6 @@ namespace Halleninfo {
 			_Aktiv = (System.Boolean) reader[prefix + nameof(Aktiv)];
 			_Typ_FK = (System.Int32) reader[prefix + nameof(Typ_FK)];
 			_Gruppe_FK = reader.ToNullableInt (prefix + nameof(Gruppe_FK));
-			_GruppeStrinh = reader.ToNullableString (prefix + nameof(GruppeStrinh));
-
         }
 
         public override void SetDataWithRelated(SqlDataReader reader, IEnumerable<PropertyInfo> foreignProperties) {
