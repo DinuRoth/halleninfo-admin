@@ -69,6 +69,7 @@ namespace Halleninfo {
         }
 		[Column]
 		[StringLength(2147483647)]
+        [GUIType(GUIType.Enum.RichTextEditor)]
 		public System.String? Text {
             get { return _Text; }
             set {
