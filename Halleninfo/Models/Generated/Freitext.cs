@@ -44,6 +44,7 @@ namespace Halleninfo {
             }
         }
 		[Column]
+        [GUITypeDateTime]
 		public System.DateTime? Von {
             get { return _Von; }
             set {
@@ -56,7 +57,8 @@ namespace Halleninfo {
             }
         }
 		[Column]
-		public System.DateTime? Bis {
+        [GUITypeDateTime]
+        public System.DateTime? Bis {
             get { return _Bis; }
             set {
                 if (value != _Bis) {
